@@ -1,10 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//this is a dummy-implementation of the game loop.
+//in this implementation, pressing any button sends the player back to the main menu.
+//Any actual gameplay code would go here.
 public class GameplayLoop : MonoBehaviour
 {
     private void Start()
