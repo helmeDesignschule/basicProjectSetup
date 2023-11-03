@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
 
 public class InstantCallbackAction<T>
@@ -30,8 +27,14 @@ public class InstantCallbackAction<T>
     }
 
     public static InstantCallbackAction<T> operator +(InstantCallbackAction<T> a, Action<T> b)
-        =>  a.RegisterCallback(b, false);
+    {
+        a ??= new InstantCallbackAction<T>();
+        return a.RegisterCallback(b, false);
+    }
 
     public static InstantCallbackAction<T> operator -(InstantCallbackAction<T> a, Action<T> b)
-        => a.DeregisterCallback(b);
+    {
+        a ??= new InstantCallbackAction<T>();
+        return a.DeregisterCallback(b);
+    }
 }

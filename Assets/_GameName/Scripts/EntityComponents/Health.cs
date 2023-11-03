@@ -6,8 +6,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public event System.Action<float> OnHealthChanged;
-    public event System.Action<float> OnHealthChangedAlpha;
-    
+
     public event System.Action<float> OnMaximumHealthChanged;
 
     [SerializeField] private float _maximumHealth;
@@ -45,9 +44,6 @@ public class Health : MonoBehaviour
         
         if (OnHealthChanged != null)
             OnHealthChanged(_currentHealth);
-        
-        if (OnHealthChangedAlpha != null)
-            OnHealthChangedAlpha((_currentHealth - oldHealth) / _maximumHealth);
     }
 
     public void SetMaximumHealth(float newMaximum)
