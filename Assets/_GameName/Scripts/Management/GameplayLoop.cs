@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,13 @@ using UnityEngine.SceneManagement;
 //Any actual gameplay code would go here.
 public class GameplayLoop : MonoBehaviour
 {
+    public static GameplayLoop Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         SceneManager.SetActiveScene(gameObject.scene);
@@ -13,7 +21,7 @@ public class GameplayLoop : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKey)
+        if (Input.GetKeyDown(KeyCode.Escape))
             ReturnToMainMenu();
     }
 

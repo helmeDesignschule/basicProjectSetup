@@ -11,7 +11,8 @@ public class StartupManager : MonoBehaviour
     {
         LoadingScreen.Show(this);
         yield return SceneLoader.LoadScene(SceneLoader.DefaultScenes.Manager);
-        yield return SceneLoader.LoadScene(SceneLoader.DefaultScenes.MainMenu);
+        if (GameplayLoop.Instance == null)
+            yield return SceneLoader.LoadScene(SceneLoader.DefaultScenes.MainMenu);
         LoadingScreen.Hide(this);
     }
 }
