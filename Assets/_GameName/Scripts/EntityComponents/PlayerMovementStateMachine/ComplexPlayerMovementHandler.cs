@@ -1,10 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ComplexPlayerMovementHandler : MonoBehaviour
 {
+    
+    //we use a enum reference for the states.
+    //we could also just use reference to the states themselves.
     public enum States
     {
         None,
@@ -13,6 +14,7 @@ public class ComplexPlayerMovementHandler : MonoBehaviour
         Falling,
     }
 
+    //we don't use the last state yet, but it is often handy to know from what state another state was entered.
     private States _lastState;
     private States _currentState;
 
@@ -28,6 +30,7 @@ public class ComplexPlayerMovementHandler : MonoBehaviour
     
     private void Awake()
     {
+        //we get all enums from the states, and then initialize them all.
         var states = Enum.GetValues(typeof(States));
         foreach (var state in states)
         {
@@ -36,10 +39,11 @@ public class ComplexPlayerMovementHandler : MonoBehaviour
                 implementation.Initialize(this);
         }
         
-        SwitchState(States.Grounded);
+        SwitchState(States.Grounded); //first state will be the grounded state.
         Tools = new PlayerTools(_references);
     }
 
+    //we use this class to get the actual implementation via the enum.
     public State GetState(States state)
     {
         switch (state)
@@ -57,16 +61,20 @@ public class ComplexPlayerMovementHandler : MonoBehaviour
     
     public void SwitchState(States switchToState)
     {
+        //if we want to switch to a state we are already in, we ignore the call.
         if (switchToState == _currentState)
             return;
         
+        //if we are in a state, we call the exit function of that state.
         var oldState = GetState(_currentState);
         if (oldState != null)
             oldState.ExitState();
 
+        //then, we save what the new state is.
         _lastState = _currentState;
         _currentState = switchToState;
 
+        //in the end, we call the enter function of the new state.
         var newState = GetState(_currentState);
         if (newState != null)
             newState.EnterState();
@@ -74,12 +82,14 @@ public class ComplexPlayerMovementHandler : MonoBehaviour
 
     private void Update()
     {
+        //if we are in a valid state, we call its update function
         var currentState = GetState(_currentState);
         if (currentState != null)
             currentState.UpdateState();
     }
     private void FixedUpdate()
     {
+        //if we are in a valid state, we call its fixed update function
         var currentState = GetState(_currentState);
         if (currentState != null)
             currentState.FixedUpdateState();

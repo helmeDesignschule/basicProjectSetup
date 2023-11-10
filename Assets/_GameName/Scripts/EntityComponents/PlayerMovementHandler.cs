@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// this is a typical implementation of a StateMachine contained within a single script.
+/// if you want to see an implementation that uses a multi-script setup, see ComplexCharacterMovementHandler.
+/// </summary>
 public class PlayerMovementHandler : MonoBehaviour
 {
     public enum States
@@ -15,6 +19,8 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private States _currentState = States.None;
     
+    //we save every function in the corresponding array of actions. this way, we can access the functions
+    //via the States-enum.
     private Action[] EnterState;
     private Action[] UpdateState;
     private Action[] ExitState;

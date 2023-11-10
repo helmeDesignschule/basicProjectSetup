@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// a test implementation of the Observer pattern.
+/// Here, we observe all enemies, and unlock an achievement, once enough enemies where defeated.
+/// </summary>
 public class AchievementHandler : MonoBehaviour
 {
     private int _enemiesKilled = 0;

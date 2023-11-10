@@ -10,6 +10,8 @@ public class PlayerTools
         _references = references;
     }
 
+    //we wrote a simple tool to make capsule casting from our current position a bit easier, so we don't have to write too much
+    //boiler plate code.
     public bool CapsuleCast(Vector3 direction, float length, out RaycastHit hit, float backwardsOffset = 0)
     {
         var capsule = _references.Transform.GetComponent<CapsuleCollider>();

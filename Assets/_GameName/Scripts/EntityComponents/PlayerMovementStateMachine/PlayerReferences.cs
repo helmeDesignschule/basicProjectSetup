@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// this is a class where we save all relevant references to the player scripts.
+/// We do this for ease of access from the different states.
+/// </summary>
 public class PlayerReferences : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidBody;
